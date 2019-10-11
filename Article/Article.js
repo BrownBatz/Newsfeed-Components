@@ -85,6 +85,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Test paragraph 1',
+    date: 'Jan 15th, 2019',
+    firstParagraph: 'as;ldfj ;asdj falksdjf askdjf askjdf; asdkjf ;laksjdf; lkajsd;f lkjalk jasdlk ja;flkj askdjf ;askjdf ;asdkljf ;alskdjf ;alksd',
+    secondParagraph: ';alksjdf ;laksjdf ;lkasjd;fl ja;sldk fj;laksjd f;lkh;lkzj c;xlkzj x;lkjv;l kjxlkjv; lzkjx;lckvj ;lkzjxc;lvkj ;zlxkcjv; lkj;clv kj;alk j;sdlkfj ;alskdjf;alksdjf',
+    thirdParagraph: 'asdkfj askdjf aklsjdf;lk ja;sdkj fa;sdlkjf hbpzoiuvc pzoiucvx poizxcupvi uzpxociuv aposidjrqwlnf,mna. nasdm fnzcxkvnj ;zlxkcjv;lk'
+  },
+  {
+    title: 'Test paragraph 2',
+    date: 'Jan 27th, 2019',
+    firstParagraph: 'a;sldfja ;ldsjf; laksjdf; lajsdpf oiuqpwoeut rp9ifsdu pvoajdf ialkh pwejh poqsdj vp asd;f n wqelkfnv dzalfjh q;ekjrn v;qpaioudfsh poaijhew p;qkned; na;sdklf',
+    secondParagraph: 'djfa;p odisjf oiasjdf; lakjsd;f lkjasd;l jcvpoiu bpso;iedrfj ;aosd fnnl.,mcsnv ;lkadjfnknmqwelrkvnkl;djcf v;lzxcnvk;aewjnf;qlkejafv ;okj;vc lkajsd;fl nasd;v',
+    thirdParagraph: 'a;sdlkfj apodfiu paodiuf poaidjf po;aijdsf ;lkajsd;lf jka'
   }
 ];
 
@@ -112,3 +126,49 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(object){
+  let articleDiv = document.createElement('div');
+  articleDiv.classList.add('article');
+  
+  // header
+  let header = document.createElement('h2');
+  header.textContent = object['title'];
+  articleDiv.appendChild(header);
+  
+  // Date
+  let date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = object['date'];
+  articleDiv.appendChild(date);
+  
+  // Three paragraphs
+  let p1 = document.createElement('p');
+  let p2 = document.createElement('p');
+  let p3 = document.createElement('p');
+  p1.textContent = object['firstParagraph'];
+  p2.textContent = object['secondParagraph'];
+  p3.textContent = object['thirdParagraph'];
+  articleDiv.appendChild(p1);
+  articleDiv.appendChild(p2);
+  articleDiv.appendChild(p3);
+
+  // Span button
+  let span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = 'Expand Article';
+  span.addEventListener('click', (e) => {
+    articleDiv.classList.toggle('article-open');
+  });
+  articleDiv.appendChild(span);
+
+  return articleDiv;
+}
+
+let articleArray = data.map(createArticle);
+
+let articleContainer = document.querySelector('.articles');
+
+articleArray.forEach((item) => {
+  articleContainer.appendChild(item);
+});
